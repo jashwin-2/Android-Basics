@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <com.example.customview.EmotionalFace
+        android:id="@+id/emotionalFace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="176dp"
+        app:state="happy"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sadButton"
+        app:layout_constraintVertical_bias="0.45" />
+
+    <com.example.customview.EmotionalFace
+        android:id="@+id/sadButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="44dp"
+        app:borderColor="@color/black"
+        app:eyesColor="@color/black"
+        app:faceColor="@android:color/holo_red_dark"
+        app:layout_constraintBottom_toTopOf="@+id/emotionalFace"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:mouthColor="@color/black"
+        app:state="sad" />
+
+    <com.example.customview.CustomLayout
+        android:id="@+id/custom_layout"
+        android:layout_width="320dp"
+        android:layout_height="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emotionalFace" />
+</androidx.constraintlayout.widget.ConstraintLayout>
