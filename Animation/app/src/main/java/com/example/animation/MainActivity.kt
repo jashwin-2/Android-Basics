@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator
 import android.app.Activity
 import android.app.ActivityOptions
 import android.content.Intent
+import android.graphics.drawable.AnimatedVectorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.transition.Slide
@@ -15,6 +16,7 @@ import android.view.Window
 import android.view.animation.AnimationUtils
 import kotlinx.android.synthetic.main.activity_2.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,11 +40,11 @@ class MainActivity : AppCompatActivity() {
             play(transition).with(rotation)
         }
         button2.setOnClickListener{
-           AnimatorSet().apply {
-               duration=4000
-               play(anim)
-               start()
-           }
+            AnimatorSet().apply {
+                duration=4000
+                play(anim)
+                start()
+            }
         }
         setUpWindowAnimation()
         btn_nxt_activity.setOnClickListener{
@@ -51,6 +53,18 @@ class MainActivity : AppCompatActivity() {
                 startActivity(it,ActivityOptions.makeSceneTransitionAnimation(this,icon,
                     "common_icon").toBundle())
             }
+        }
+
+
+        //vector animation
+        var isChecked = true
+        imageView.setOnClickListener{
+            if (isChecked)
+                imageView.setImageResource(R.drawable.check_to_close)
+            else
+                imageView.setImageResource(R.drawable.close_to_check)
+            isChecked = !isChecked
+            (imageView.drawable as AnimatedVectorDrawable).start()
         }
     }
 
