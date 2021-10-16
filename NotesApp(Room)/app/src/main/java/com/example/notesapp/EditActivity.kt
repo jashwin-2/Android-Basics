@@ -1,15 +1,12 @@
 package com.example.notesapp
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.SystemClock
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_edit.*
-import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -76,8 +73,4 @@ class EditActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        this.finish()
-    }
 }

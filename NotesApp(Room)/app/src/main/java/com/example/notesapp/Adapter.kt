@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class Adapter(
-    val context: Context,
     private val noteClickDeleteInterface: OnDeleteClicked,
     private val onNoteClicked: OnNoteClicked
 ) :
@@ -53,7 +52,6 @@ class Adapter(
     }
 
     override fun getItemCount(): Int {
-
         return allNotes.size
     }
 

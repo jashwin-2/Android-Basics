@@ -1,10 +1,9 @@
 package com.example.notesapp
 
-import android.annotation.SuppressLint
 import android.app.Application
+import android.content.ContentResolver
 import android.content.ContentValues
 import android.database.Cursor
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 
@@ -12,7 +11,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
     var allNote = MutableLiveData<List<Note>>()
     private val list = mutableListOf<Note>()
 
-    val contentResolver = application.contentResolver
+    private val contentResolver: ContentResolver = application.contentResolver
     var rs: Cursor? = null
 
     init {

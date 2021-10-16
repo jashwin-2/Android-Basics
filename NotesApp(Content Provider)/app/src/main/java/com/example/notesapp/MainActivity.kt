@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(), OnNoteClicked, OnDeleteClicked {
 
         recyclerView = findViewById(R.id.notesRV)
         notesRV.layoutManager = LinearLayoutManager(this)
-        rvAdapter = Adapter(this, this, this)
+        rvAdapter = Adapter(this, this)
         notesRV.adapter = rvAdapter
 
         viewModel.allNote.observe(this) {
