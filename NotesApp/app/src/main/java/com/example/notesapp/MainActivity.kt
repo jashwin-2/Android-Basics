@@ -2,6 +2,7 @@ package com.example.notesapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,23 +29,28 @@ class MainActivity : AppCompatActivity(), OnNoteClicked, OnDeleteClicked {
         notesRV.adapter = rvAdapter
 
         viewModel.allNote.observe(this) {
-                rvAdapter.updateList(it)
+            Log.d("Debug", "${it.size} ")
+            rvAdapter.updateList(it)
         }
 
         idFAB.setOnClickListener {
             Intent(this, EditActivity::class.java).apply {
                 startActivity(this)
             }
+
         }
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.refresh()
+    }
     override fun onDeleteIconClick(note: Note) {
         if (rvAdapter.allNotes.size == 1) {
             rvAdapter.updateList(listOf())
         }
         viewModel.delete(note)
-
     }
 
     override fun onNoteClick(note: Note) {
@@ -55,7 +61,6 @@ class MainActivity : AppCompatActivity(), OnNoteClicked, OnDeleteClicked {
             putExtra("type", "edit")
             putExtra("id", note.id)
             startActivity(this)
-            this@MainActivity.finish()
         }
     }
 }

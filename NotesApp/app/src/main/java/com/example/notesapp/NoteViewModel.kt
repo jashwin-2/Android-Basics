@@ -19,7 +19,7 @@ class NoteViewModel(application: Application) : AndroidViewModel(application) {
         refresh()
     }
 
-    private fun refresh() {
+    public fun refresh() {
         list.clear()
         rs = contentResolver.query(
             NoteProvider.CONTENT_URI, arrayOf(

@@ -2,12 +2,14 @@ package com.example.notesapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.SystemClock
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_edit.*
+import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -38,12 +40,15 @@ class EditActivity : AppCompatActivity() {
             val noteTitle = intent.getStringExtra("title")
             val noteDescription = intent.getStringExtra("description")
             noteID = intent.getIntExtra("id", -1)
+            title ="Edit note"
             saveBtn.text = "Update Note"
             noteTitleEdit.setText(noteTitle)
             noteEdit.setText(noteDescription)
 
-        } else
+        } else {
             btn_save.text = "Save"
+            title = "Create note"
+        }
         btn_save.setOnClickListener {
         }
 
@@ -67,14 +72,12 @@ class EditActivity : AppCompatActivity() {
                     Toast.makeText(this, "$noteTitle Added", Toast.LENGTH_LONG).show()
                 }
             }
-            startActivity(Intent(applicationContext, MainActivity::class.java))
-            this.finish()
+           this.finish()
         }
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-        startActivity(Intent(applicationContext, MainActivity::class.java))
         this.finish()
     }
 }
