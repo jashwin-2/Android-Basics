@@ -1,12 +1,14 @@
 package com.example.notesapp
 
 import android.annotation.SuppressLint
-import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 class Adapter(
@@ -15,8 +17,7 @@ class Adapter(
 ) :
     RecyclerView.Adapter<Adapter.ViewHolder>() {
 
-
-    var allNotes: MutableList<Note> = mutableListOf()
+ private var oldNotes : List<Note> = listOf()
 
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -37,35 +38,34 @@ class Adapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.noteTV.text = allNotes[position].title
-        holder.dateTV.text =  allNotes[position].time
+        holder.noteTV.text = oldNotes[position].title
+        holder.dateTV.text =  oldNotes[position].time
 
         holder.deleteIV.setOnClickListener {
-
-            noteClickDeleteInterface.onDeleteIconClick(allNotes[position])
+            noteClickDeleteInterface.onDeleteIconClick(oldNotes[position])
         }
 
 
         holder.itemView.setOnClickListener {
-            onNoteClicked.onNoteClick(allNotes[position])
+            onNoteClicked.onNoteClick(oldNotes[position])
         }
     }
 
     override fun getItemCount(): Int {
-        return allNotes.size
+        return oldNotes.size
     }
 
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun updateList(newList: List<Note>) {
-        allNotes.clear()
-        allNotes.addAll(newList)
-        notifyDataSetChanged()
+
+    fun setList(newList: List<Note>) {
+       var myDiff = MyDiffUtil(oldNotes,newList)
+        val diffResult = DiffUtil.calculateDiff(myDiff)
+        oldNotes = newList
+        diffResult.dispatchUpdatesTo(this)
     }
 }
 
 interface OnDeleteClicked {
-
     fun onDeleteIconClick(note: Note)
 }
 

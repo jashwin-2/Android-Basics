@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity(), OnNoteClicked, OnDeleteClicked {
 
         viewModel.allNote.observe(this) {
             Log.d("Debug", "${it.size} ")
-            rvAdapter.updateList(it)
+            rvAdapter.setList(it)
         }
 
         idFAB.setOnClickListener {
@@ -43,9 +43,6 @@ class MainActivity : AppCompatActivity(), OnNoteClicked, OnDeleteClicked {
     }
 
     override fun onDeleteIconClick(note: Note) {
-        if (rvAdapter.allNotes.size == 1) {
-            rvAdapter.updateList(listOf())
-        }
         viewModel.delete(note)
     }
 
